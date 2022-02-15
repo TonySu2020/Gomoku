@@ -5,6 +5,11 @@ import model.stone.Color;
 import model.stone.BlackWhiteStone;
 import model.stone.Stone;
 
+/**
+ * This class represents a standard 15 * 15 Gomoku board. The first move is made by black. Players
+ * take turns to make a move. Each move is tracked for undo and redo. Once the game is over for
+ * either having a winner or the board is full, none of the players can make anther move.
+ */
 public class StandardBoard implements Model {
 
   private final int height;
@@ -19,19 +24,29 @@ public class StandardBoard implements Model {
   private final Stack<Stone> previousMoves;
   private final Stack<Stone> futureMoves;
 
+
   public StandardBoard(Stone[][] board) {
     height = board.length;
     width = board[0].length;
     this.board = new Stone[height][width];
+    int blackCount = 0;
+    int whileCount = 0;
     for (int row = 0; row < height; row++) {
       for (int col = 0; col < width; col++) {
         if (board[row].length != this.board[row].length) {
           throw new IllegalArgumentException("Invalid input board array.");
         }
         this.board[row][col] = board[row][col];
+        if(board[row][col] != null) {
+          if(board[row][col].getColor() == Color.BLACK) {
+            blackCount++;
+          } else {
+            whileCount++;
+          }
+        }
       }
     }
-    isBlacksTurn = true;
+    isBlacksTurn = blackCount == whileCount;
     moveCount = 0;
     maxMoveCount = width * height;
     winner = null;
