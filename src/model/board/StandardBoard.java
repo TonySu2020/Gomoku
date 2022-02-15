@@ -24,7 +24,11 @@ public class StandardBoard implements Model {
   private final Stack<Stone> previousMoves;
   private final Stack<Stone> futureMoves;
 
-
+  /**
+   * Constructor to initialize the game with a board that can be either empty or non-empty.
+   *
+   * @param board the board that used to init
+   */
   public StandardBoard(Stone[][] board) {
     height = board.length;
     width = board[0].length;
@@ -37,8 +41,8 @@ public class StandardBoard implements Model {
           throw new IllegalArgumentException("Invalid input board array.");
         }
         this.board[row][col] = board[row][col];
-        if(board[row][col] != null) {
-          if(board[row][col].getColor() == Color.BLACK) {
+        if (board[row][col] != null) {
+          if (board[row][col].getColor() == Color.BLACK) {
             blackCount++;
           } else {
             whileCount++;
@@ -54,6 +58,9 @@ public class StandardBoard implements Model {
     futureMoves = new Stack<>();
   }
 
+  /**
+   * Constructor to initialize the game on a standard 15 * 15 empty board.
+   */
   public StandardBoard() {
     this(new Stone[15][15]);
   }
@@ -81,6 +88,11 @@ public class StandardBoard implements Model {
     determineWinner(stone);
   }
 
+  /**
+   * Determine the stone being placed can win the game.
+   *
+   * @param stone the stone being placed
+   */
   private void determineWinner(Stone stone) {
     int row = stone.getRow();
     int col = stone.getCol();
@@ -91,6 +103,14 @@ public class StandardBoard implements Model {
     }
   }
 
+  /**
+   * Check if the stone win the game in the vertical direction.
+   *
+   * @param row the row of the stone
+   * @param col the row of the stone
+   * @param color the color of the stone
+   * @return  true if the stone win the game
+   */
   private boolean checkVertical(int row, int col, Color color) {
     int r = row;
     int count = 1;
@@ -106,6 +126,14 @@ public class StandardBoard implements Model {
     return count >= 5;
   }
 
+  /**
+   * Check if the stone win the game in the horizontal direction.
+   *
+   * @param row the row of the stone
+   * @param col the row of the stone
+   * @param color the color of the stone
+   * @return  true if the stone win the game
+   */
   private boolean checkHorizontal(int row, int col, Color color) {
     int c = col;
     int count = 1;
@@ -121,6 +149,14 @@ public class StandardBoard implements Model {
     return count >= 5;
   }
 
+  /**
+   * Check if the stone win the game in the diagonal direction.
+   *
+   * @param row the row of the stone
+   * @param col the row of the stone
+   * @param color the color of the stone
+   * @return  true if the stone win the game
+   */
   private boolean checkDiagonal(int row, int col, Color color) {
     int r = row;
     int c = col;
@@ -140,6 +176,14 @@ public class StandardBoard implements Model {
     return count >= 5;
   }
 
+  /**
+   * Check if the stone win the game in the anti-diagonal direction.
+   *
+   * @param row the row of the stone
+   * @param col the row of the stone
+   * @param color the color of the stone
+   * @return  true if the stone win the game
+   */
   private boolean checkAntiDiagonal(int row, int col, Color color) {
     int r = row;
     int c = col;
