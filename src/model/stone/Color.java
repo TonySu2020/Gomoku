@@ -1,4 +1,4 @@
-package model;
+package model.stone;
 
 public enum Color {
 

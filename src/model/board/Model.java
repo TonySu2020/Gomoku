@@ -1,6 +1,6 @@
 package model.board;
 
-import model.Color;
+import model.stone.Color;
 
 public interface Model {
 

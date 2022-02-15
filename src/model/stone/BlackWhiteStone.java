@@ -1,7 +1,5 @@
 package model.stone;
 
-import model.Color;
-
 public class BlackWhiteStone implements Stone {
 
   private final int row;

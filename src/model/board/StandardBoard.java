@@ -1,7 +1,7 @@
 package model.board;
 
 import java.util.Stack;
-import model.Color;
+import model.stone.Color;
 import model.stone.BlackWhiteStone;
 import model.stone.Stone;
 
